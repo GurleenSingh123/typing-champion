@@ -1,0 +1,33 @@
+#resultPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.resultHead{
+    font-size: 35px;
+    color: green;
+}
+
+.typeResult{
+    font-size: 28px;;
+    color: rgba(255, 255, 255, 0.69);
+}
+
+.testAgainBtn{
+    text-align: center;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: blue;
+    font-size: 20px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.testAgainBtn:hover{
+    transform: translateY(-3px);
+}

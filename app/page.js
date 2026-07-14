@@ -1,65 +1,358 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+import "./styles/footer.css"
+import "./styles/navbar.css"
+
+import Navbar from "./components/navbar"
+import Footer from "./components/footer"
+import paragraphs from "./data/paragraphs.json";
+import { useState, useRef, useEffect } from "react"
+import { useRouter } from "next/navigation";
+
+function home(){
+
+    const [time, setTime] = useState(60);
+    const [isTyping, setIsTyping] = useState(false);
+    const [timerStarted, setTimerStarted] = useState(false);
+    const [paragraph, setParagraph] = useState('');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [charStatus, setCharStatus] = useState([]);
+    const [testStarted, setTestStarted] = useState(false);
+    const [lineNumber, setLineNumber] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+    const typingRef = useRef(null);
+    const paragraphRef = useRef(null);
+    const timerRef = useRef(null);
+    const inactivityRef = useRef(null);
+    const lineHeight = 65;
+
+    const [totalTime, setTotalTime] = useState(60);
+    
+    const router = useRouter();
+
+    useEffect(() => {
+        router.prefetch("/result");
+    }, [router]);
+
+    function calculateWPM() {
+
+        const correctCharacters = charStatus.filter(
+            status => status === "correct"
+        ).length;
+
+        const timeInMinutes = totalTime / 60;
+
+        const speed = Math.floor(
+            (correctCharacters / 5) / timeInMinutes
+        );
+
+        return speed;
+    }   
+
+
+    function calculateAccuracy() {
+
+        const correctCharacters = charStatus.filter(
+            status => status === "correct"
+        ).length;
+
+        const incorrectCharacters = charStatus.filter(
+            status => status === "incorrect"
+        ).length;
+
+        const totalTyped = correctCharacters + incorrectCharacters;
+
+        if (totalTyped === 0) {
+            return 0;
+        }
+
+        const result = Math.floor(
+            (correctCharacters / totalTyped) * 100
+        );
+
+        return result;
+    }
+
+    function getRandomParagraph() {
+
+        const usedIndexes = new Set();
+        const selected = [];
+
+        while (selected.length < 10) {
+
+            const randomIndex = Math.floor(Math.random() * paragraphs.length);
+
+            if (!usedIndexes.has(randomIndex)) {
+
+                usedIndexes.add(randomIndex);
+                selected.push(paragraphs[randomIndex]);
+
+            }
+        }
+
+        setParagraph(selected.join(" "));
+
+        setCurrentIndex(0);
+        setCharStatus([]);
+    }
+
+    let displayTime;
+
+    if(time >= 60){
+        displayTime = `${time / 60} min`;
+    }
+
+    else{
+        displayTime = `${time} sec`;
+    }
+
+
+    let pageClass;
+
+    if(isTyping){
+        pageClass = 'typingMode';
+    }
+
+    else{
+        pageClass = '';
+    }
+
+    function handleMouseMove() {
+        setIsTyping(false);
+    }
+
+    function timeStart() {
+
+        setCurrentIndex(0);
+        setCharStatus([]);
+
+        setTime(totalTime);
+        setIsPaused(false);
+
+        setTestStarted(true);
+        setIsTyping(true);
+        setTimerStarted(false);
+        
+        setLineNumber(0);
+
+        setTimeout(() => {
+            typingRef.current.focus();
+        }, 0);
+
+
+    }
+
+    function startTimer() {
+
+        if (timerRef.current) return;
+
+        setTimerStarted(true);
+
+        timerRef.current = setInterval(() => {
+
+            setTime((prev) => {
+
+                if (prev <= 1) {
+
+                    clearInterval(timerRef.current);
+                    timerRef.current = null;
+
+                    clearTimeout(inactivityRef.current);
+
+                    setTimerStarted(false);
+                    setTestStarted(false);
+
+                    return 0;
+                }
+
+                return prev - 1;
+
+            });
+
+        }, 1000);
+    }
+
+    function pauseTimer() {
+
+        if (timerRef.current) {
+
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+
+            setTimerStarted(false);
+
+            setIsPaused(true);   // Show message
+        }
+
+    }
+
+    function resetInactivityTimer() {
+
+        clearTimeout(inactivityRef.current);
+
+        inactivityRef.current = setTimeout(() => {
+
+            pauseTimer();
+
+        }, 10000);
+
+    }
+
+
+    function handleKeyDown(event) {
+
+        if (!testStarted) return;
+
+        if (!isTyping) {
+            setIsTyping(true);
+        }
+
+        if (currentIndex >= paragraph.length) {
+            return;
+        }
+
+        if (
+            event.key === "Shift" ||
+            event.key === "CapsLock" ||
+            event.key === "Control" ||
+            event.key === "Alt" ||
+            event.key === "Tab"
+        ) {
+            return;
+        }
+
+        if (isPaused) {
+            setIsPaused(false);
+        }
+
+        startTimer();
+        resetInactivityTimer();
+
+    if (event.key === "Backspace") {
+
+        if (currentIndex <= 0) return;
+
+            let wordStart = currentIndex;
+
+                while (
+                wordStart > 0 &&
+                paragraph[wordStart - 1] !== " "
+            ) {
+                wordStart--;
+        }
+
+        if (currentIndex - 1 < wordStart) {
+            return;
+        }
+
+            const newStatus = [...charStatus];
+            newStatus[currentIndex - 1] = "";
+
+            setCharStatus(newStatus);
+            setCurrentIndex(prev => prev - 1);
+
+            return;
+        }   
+
+        const typedChar = event.key;
+        const expectedChar = paragraph[currentIndex];
+
+        const newStatus = [...charStatus];
+
+        if (typedChar === expectedChar) {
+            newStatus[currentIndex] = "correct";
+        } else {
+            newStatus[currentIndex] = "incorrect";
+        }
+
+        setCharStatus(newStatus);
+        setCurrentIndex(prev => prev + 1);
+    }
+
+
+    useEffect(() => {
+
+        if (currentIndex <= 0) return;
+
+        const chars = document.querySelectorAll(".typePara span");
+
+        const previousChar = chars[currentIndex - 1];
+        const currentChar = chars[currentIndex];
+
+        if (!previousChar || !currentChar) return;
+
+        if (currentChar.offsetTop > previousChar.offsetTop) {
+            setLineNumber(prev => prev + 1);
+        }
+
+    }, [currentIndex]);
+ 
+    useEffect(() => {
+
+        if (!testStarted && time === 0) {
+
+            const wpm = calculateWPM();
+            const accuracy = calculateAccuracy();
+
+            localStorage.setItem("wpm", wpm);
+            localStorage.setItem("accuracy", accuracy);
+
+            router.push("/result");
+        }
+
+    }, [testStarted, time, charStatus]);
+
+    useEffect(() => {
+        getRandomParagraph();
+    }, []);
+
+
+    return(
+        <>
+
+        <div className={pageClass} onMouseMove={handleMouseMove}>
+
+            {!isTyping && <Navbar />}
+
+            <p id="time" className="typeTime">{`Time: ${displayTime} `}</p>
+            
+            {isPaused && (<div className="pauseMessage"> Timer paused. Resume typing to continue.</div>)}
+
+            <div className="typeBox" onKeyDown={handleKeyDown} tabIndex={0} ref={typingRef}> 
+
+                <div className="textWrapper" style={{
+                    transform: `translateY(-${lineNumber * lineHeight}px)`}}>
+
+                
+                <p className="typePara" ref={paragraphRef}>
+                                
+                    {paragraph.split("").map((char, index) => {
+                    let className = charStatus[index] || "";
+
+                    if (testStarted && index === currentIndex) {
+                        className += " active";
+                    }
+
+                    return (
+                        <span key={index} className={className}>{char}</span>
+                    );
+
+                })}
+                
+                </p>
+                </div>
+
+            </div>
+
+            {!isTyping && (<button id="btn" onClick={timeStart} className="startBtn">Start</button>)}
+
+            {!isTyping &&<Footer />}
+
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+
+        </>
+    )
+
 }
+
+export default home

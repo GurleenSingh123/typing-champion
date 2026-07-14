@@ -1,26 +1,83 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body{
+    background-color: black;
+    margin: 0;
+    color: white;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.typeBox{
+    width: 60%;
+    height: 350px;
+    background-color: white;
+    margin: 50px auto 50px;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    border-radius: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.startBtn{
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto 25px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.startBtn:hover{
+    transform: translateY(-3px);
+}
+
+.typeTime{
+    font-size: 25px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.typingMode{
+    cursor: none;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.typePara{
+    color: rgba(0, 0, 0, 0.611);
+    font-size: 35px;
+    line-height: 65px;
+    font-family:Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 12px;
+    letter-spacing: 2px;
+    overflow-y: hidden;
+    transition: transform 0.2s linear;
+}
+
+.correct{
+    color: rgb(0, 216, 0);
+}
+
+.incorrect{
+    color: red;
+}
+
+.active{
+    background-color: rgba(255,255,255,0.2);
+    border-left: 2px solid #00bfff;
+}
+
+.pauseMessage{
+    color: red;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
