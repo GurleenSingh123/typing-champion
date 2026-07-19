@@ -25,6 +25,21 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+
+        <Script id="monetag" strategy="afterInteractive">
+          {`
+          (function(s){
+            s.dataset.zone='11347381';
+            s.src='https://nap5k.com/tag.min.js';
+          })(
+            [document.documentElement, document.body]
+              .filter(Boolean)
+              .pop()
+              .appendChild(document.createElement('script'))
+          );
+        `}
+        </Script>
+
         <meta name="monetag" content="00ed739fa4b175dd11749637bf1ae5df"></meta>
 
         <Script
