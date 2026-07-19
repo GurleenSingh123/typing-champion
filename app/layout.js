@@ -26,21 +26,7 @@ export default function RootLayout({ children }) {
     >
       <head>
 
-        <script>{`(function(s){s.dataset.zone='11349054',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}</script>
-
-        {/* <Script id="monetag" strategy="afterInteractive">
-          {`
-          (function(s){
-            s.dataset.zone='11347381';
-            s.src='https://nap5k.com/tag.min.js';
-          })(
-            [document.documentElement, document.body]
-              .filter(Boolean)
-              .pop()
-              .appendChild(document.createElement('script'))
-          );
-        `}
-        </Script> */}
+        <script>{`(function(s){s.dataset.zone='11347381',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}</script>
 
         <meta name="monetag" content="00ed739fa4b175dd11749637bf1ae5df"></meta>
 
