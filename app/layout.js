@@ -25,6 +25,9 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        
+        <meta name="monetag" content="00ed739fa4b175dd11749637bf1ae5df"></meta>
+
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-FJ71DCKT91"
           strategy="afterInteractive"
