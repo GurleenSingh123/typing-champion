@@ -26,6 +26,8 @@ export default function RootLayout({ children }) {
     >
       <head>
 
+        <script src="https://5gvci.com/act/files/tag.min.js?z=11349111" data-cfasync="false" async></script>
+
         <script>{`(function(s){s.dataset.zone='11347381',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}</script>
 
         <meta name="monetag" content="00ed739fa4b175dd11749637bf1ae5df"></meta>
