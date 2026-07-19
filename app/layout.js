@@ -26,7 +26,9 @@ export default function RootLayout({ children }) {
     >
       <head>
 
-        <Script id="monetag" strategy="afterInteractive">
+        <script>{`(function(s){s.dataset.zone='11349054',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}</script>
+
+        {/* <Script id="monetag" strategy="afterInteractive">
           {`
           (function(s){
             s.dataset.zone='11347381';
@@ -38,7 +40,7 @@ export default function RootLayout({ children }) {
               .appendChild(document.createElement('script'))
           );
         `}
-        </Script>
+        </Script> */}
 
         <meta name="monetag" content="00ed739fa4b175dd11749637bf1ae5df"></meta>
 
