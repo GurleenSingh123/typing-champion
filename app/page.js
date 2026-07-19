@@ -313,7 +313,6 @@ function home(){
         <div className={pageClass} onMouseMove={handleMouseMove}>
 
             {!isTyping && <Navbar />}
-            <script src="https://quge5.com/88/tag.min.js" data-zone="261392" async data-cfasync="false"></script>
 
             <p id="time" className="typeTime">{`Time: ${displayTime} `}</p>
             
