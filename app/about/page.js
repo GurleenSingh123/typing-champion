@@ -15,6 +15,8 @@ function about(){
     return(
         <>  
 
+        <div className="page">
+
         <Navbar />
         <div id="aboutSection">
             <h2 className='head'>About Us</h2>
@@ -49,6 +51,7 @@ function about(){
         </div>
 
         <Footer />
+        </div>
         </>
     )
 

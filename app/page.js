@@ -201,6 +201,10 @@ function home(){
 
     function handleKeyDown(event) {
 
+        if (event.code === "Space") {
+            event.preventDefault();
+        }
+
         if (!testStarted) return;
 
         if (!isTyping) {
@@ -310,10 +314,12 @@ function home(){
     return(
         <>
 
-        <div className={pageClass} onMouseMove={handleMouseMove}>
+        <div className={`page ${pageClass} `} onMouseMove={handleMouseMove}>
 
             {!isTyping && <Navbar />}
 
+        <main className="mainContent">
+            
             <p id="time" className="typeTime">{`Time: ${displayTime} `}</p>
             
             {isPaused && (<div className="pauseMessage"> Timer paused. Resume typing to continue.</div>)}
@@ -346,11 +352,11 @@ function home(){
 
             {!isTyping && (<button id="btn" onClick={timeStart} className="startBtn">Start</button>)}
 
+        </main>
             {!isTyping &&<Footer />}
 
         </div>
-
-        </>
+    </>
     )
 
 }

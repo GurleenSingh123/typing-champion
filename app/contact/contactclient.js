@@ -66,8 +66,14 @@ function ContactClient(){
 
     return(
         <>
+        <div className="page">
+
+        
             <Navbar />
 
+        <div className="contactPage"> 
+
+        
             <div className="contactSection">
 
                 <h1 className="contactHead">Contact Us</h1>
@@ -106,8 +112,11 @@ function ContactClient(){
                 <p className="errMsg">{errMsg}</p>
 
             </div>
-                
+            
+            </div>
             <Footer />
+
+        </div>
         </>
     )
 
