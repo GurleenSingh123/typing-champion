@@ -1,5 +1,9 @@
 #footer {
     background-color: #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     padding: 30px;
     display: flex;
     align-items: center;
@@ -23,4 +27,52 @@
 .footerSubHead{
     display: flex;
     gap: 30px;
+}
+
+@media (max-width: 900px){
+    #footer{
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 28px;
+        gap: 18px;
+    }
+
+    .footerHead{
+        font-size: 18px;
+    }
+
+    .footerSubHead{
+        gap: 28px;
+    }
+}
+
+@media (max-width: 768px){
+    #footer{
+        padding: 25px;
+        gap: 16px;
+    }
+
+    .footerHead{
+        font-size: 16px;
+    }
+
+    .footerSubHead{
+        gap: 25px;
+    }
+}
+
+@media (max-width: 468px){
+    #footer{
+        padding: 24px;
+        gap: 15px;
+    }
+
+    .footerHead{
+        font-size: 15px;
+    }
+
+    .footerSubHead{
+        gap: 22px;
+    }
 }

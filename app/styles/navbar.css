@@ -24,3 +24,48 @@
 .navSubHead:hover{
     color: rgb(200, 200, 200);
 }
+
+@media (max-width: 900px){
+    #navBar{
+        padding: 35px;
+    }
+
+    .siteName{
+        font-size: 24px;
+    }
+
+    .navSubHead{
+        font-size: 18px;
+        margin-right: 18px;
+    }
+}
+
+@media (max-width: 768px){
+    #navBar{
+        padding: 32px;
+    }
+
+    .siteName{
+        font-size: 22px;
+    }
+
+    .navSubHead{
+        font-size: 16px;
+        margin-right: 16px;
+    }
+}
+
+@media (max-width: 468px){
+    #navBar{
+        padding: 30px;
+    }
+
+    .siteName{
+        font-size: 20px;
+    }
+
+    .navSubHead{
+        font-size: 15px;
+        margin-right: 15px;
+    }
+}

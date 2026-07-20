@@ -82,77 +82,97 @@
 
 @media (max-width: 900px){
     .contactSection{
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.449);
-        margin-top: 50px;
-        margin-bottom: 50px;
-        width: 50%;
+        margin-top: 45px;
+        margin-bottom: 45px;
+        width: 45%;
+        padding: 50px;
     }
 
     .contactHead{
-        text-align: center;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        margin-top: 50px;
-        font-size: 40px;
+        margin-top: 2px;
+        font-size: 38px;
     }
 
     .contactPara{
-        font-size: 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 38px;
     }
 
     .inputField{
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px 15px;
-        font-size: 16px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        width: 100%;
+        font-size: 15px;
     }
 
-    #textField{
-        resize: none;    
-        height: 100px;
+    #textField{  
+        height: 90px;
     }
 
     .btnSubmit{
         padding: 12px 16px;
-        width: 90%;
-        border: none;
-        border-radius: 10px;
-        background-color: #555;
-        color: white;
+        width: 107%;
         font-size: 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        cursor: pointer;
-        margin-top: 20px;
-        transition: all 0.3s ease;
+    }
+}
+
+@media (max-width: 768px){
+    .contactSection{
+        margin-top: 40px;
+        margin-bottom: 40px;
+        width: 40%;
     }
 
-    .btnSubmit:disabled{
-        cursor: not-allowed;
-        background-color: #444;
+    .contactHead{
+        margin-top: 2px;
+        font-size: 35px;
     }
 
-    .btnSubmit:hover{
-        transform: translateY(-3px);
+    .contactPara{
+        margin-bottom: 30px;
     }
 
-    .successMsg{
-        color: rgb(0, 212, 0);
+    .inputField{
+        width: 100%;
+        font-size: 14px;
+    }
+
+    #textField{  
+        height: 80px;
+    }
+
+    .btnSubmit{
+        padding: 10px 15px;
+        width: 107%;
         font-size: 20px;
-        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 468px){
+    .contactSection{
+        margin-top: 35px;
+        margin-bottom: 35px;
+        width: 35%;
     }
 
-    .errMsg{
-        margin: 0;
-        margin-bottom: 10px;
-        color: red;
+    .contactHead{
+        margin-top: 2px;
+        font-size: 30px;
+    }
+
+    .contactPara{
+        margin-bottom: 28px;
+    }
+
+    .inputField{
+        width: 100%;
+        font-size: 12px;
+    }
+
+    #textField{  
+        height: 70px;
+    }
+
+    .btnSubmit{
+        padding: 10px 15px;
+        width: 105%;
         font-size: 20px;
     }
 }

@@ -1,11 +1,13 @@
-body{
+html, body{
     background-color: black;
     margin: 0;
     color: white;
+    padding-bottom: 80px; 
+    overflow-x: hidden;
 }
 
 .typeBox{
-    width: 60%;
+    width: 55%;
     height: 350px;
     background-color: white;
     margin: 50px auto 50px;

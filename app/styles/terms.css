@@ -23,3 +23,76 @@
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+@media (max-width: 900px){
+    .termsContainer{
+        padding: 28px;
+    }
+
+    .termsHead{
+        font-size: 28px;
+    }
+
+    .termsSubHead{
+        font-size: 24px;
+    }
+
+    .termsPara{
+        line-height: 22px;
+        letter-spacing: 1.8px;
+        font-size: 18px;
+    }
+
+    .termsList{
+        font-size: 18px;
+    }
+
+}
+
+@media (max-width: 768px){
+    .termsContainer{
+        padding: 25px;
+    }
+
+    .termsHead{
+        font-size: 25px;
+    }
+
+    .termsSubHead{
+        font-size: 22px;
+    }
+
+    .termsPara{
+        line-height: 20px;
+        letter-spacing: 1.6px;
+        font-size: 16px;
+    }
+
+    .termsList{
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width: 468px){
+    .termsContainer{
+        padding: 25px;
+    }
+
+    .termsHead{
+        font-size: 22px;
+    }
+
+    .termsSubHead{
+        font-size: 20px;
+    }
+
+    .termsPara{
+        font-size: 15px;
+    }
+
+    .termsList{
+        font-size: 15px;
+    }
+
+}

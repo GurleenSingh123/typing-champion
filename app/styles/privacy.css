@@ -28,3 +28,87 @@
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+@media (max-width: 900px){
+    .privacyContainer{
+        padding: 28px;
+    }
+
+    .privacyHead{
+        font-size: 28px;
+    }
+
+    .privacySubHead{
+        font-size: 25px;
+    }
+
+    .privacyShortHead{
+        font-size: 22px;
+    }
+
+    .privacyPara{
+        font-size: 18px;
+        letter-spacing: 1.8px;
+        line-height: 22px;
+    }
+
+    .privacyList{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px){
+    .privacyContainer{
+        padding: 26px;
+    }
+
+    .privacyHead{
+        font-size: 26px;
+    }
+
+    .privacySubHead{
+        font-size: 22px;
+    }
+
+    .privacyShortHead{
+        font-size: 20px;
+    }
+
+    .privacyPara{
+        font-size: 16px;
+        letter-spacing: 1.6px;
+        line-height: 20px;
+    }
+
+    .privacyList{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 468px){
+    .privacyContainer{
+        padding: 25px;
+    }
+
+    .privacyHead{
+        font-size: 22px;
+    }
+
+    .privacySubHead{
+        font-size: 20px;
+    }
+
+    .privacyShortHead{
+        font-size: 18px;
+    }
+
+    .privacyPara{
+        font-size: 15px;
+        letter-spacing: 1.5px;
+        line-height: 18px;
+    }
+
+    .privacyList{
+        font-size: 16px;
+    }
+}
