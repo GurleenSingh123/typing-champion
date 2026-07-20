@@ -14,3 +14,47 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+@media (max-width: 900px){
+    #aboutSection{
+        padding: 28px;
+    }
+
+    .head{
+        font-size: 28px;
+    }
+
+    .para{
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+
+@media (max-width: 768px){
+    #aboutSection{
+        padding: 25px;
+    }
+
+    .head{
+        font-size: 25px;
+    }
+
+    .para{
+        font-size: 17px;
+        line-height: 20px;
+    }
+}
+
+@media (max-width: 468px){
+    #aboutSection{
+        padding: 22px;
+    }
+
+    .head{
+        font-size: 22px;
+    }
+
+    .para{
+        font-size: 15px;
+        line-height: 18px;
+    }
+}
