@@ -535,7 +535,6 @@ function handleBackspace() {
                 autoCorrect="off"
                 autoCapitalize="off"
                 spellCheck={false}
-                enterKeyHint="done"
                 inputMode="text"/>
 
             {isPaused && (<div className="pauseMessage"> Timer paused. Resume typing to continue.</div>)}
