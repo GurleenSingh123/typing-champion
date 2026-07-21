@@ -30,6 +30,10 @@ function home(){
 
     const [totalTime, setTotalTime] = useState(60);
     
+    const isMobile =
+        typeof window !== "undefined" &&
+    ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
     const router = useRouter();
 
     useEffect(() => {
@@ -432,8 +436,8 @@ function home(){
                 ref={inputRef}
                 type="text"
                 className="hiddenInput"
-                onKeyDown={handleKeyDown}
-                onInput={handleInput}
+                onKeyDown={!isMobile ? handleKeyDown : undefined}
+                onInput={isMobile ? handleInput : undefined}
                 autoComplete="off"
                 autoCorrect="off"
                 autoCapitalize="off"
