@@ -341,18 +341,41 @@ function home(){
     //     processCharacter(event.key);
     // }
 
+    // function handleInput(event) {
+
+    //     const isTouchDevice =
+    //         "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+    //     if (!isTouchDevice) return;
+
+    //     const value = event.target.value;
+
+    //     if (!value) return;
+
+    //     processCharacter(value[value.length - 1]);
+
+    //     event.target.value = "";
+    // }
+
     function handleInput(event) {
 
-        const isTouchDevice =
-            "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-        if (!isTouchDevice) return;
+        // Ignore desktop keyboards (handled by onKeyDown)
+        if (event.nativeEvent.inputType === undefined) {
+            return;
+        }
 
         const value = event.target.value;
 
         if (!value) return;
 
-        processCharacter(value[value.length - 1]);
+        const typedChar = value[value.length - 1];
+
+        if (typedChar === "\n") {
+            event.target.value = "";
+            return;
+        }
+
+        processCharacter(typedChar);
 
         event.target.value = "";
     }
