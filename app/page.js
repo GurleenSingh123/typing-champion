@@ -21,9 +21,11 @@ function home(){
     const [lineNumber, setLineNumber] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
     const typingRef = useRef(null);
+    const inputRef = useRef(null);
     const paragraphRef = useRef(null);
     const timerRef = useRef(null);
     const inactivityRef = useRef(null);
+    
     const lineHeight = 65;
 
     const [totalTime, setTotalTime] = useState(60);
@@ -136,10 +138,8 @@ function home(){
         setLineNumber(0);
 
         setTimeout(() => {
-            typingRef.current.focus();
+            inputRef.current?.focus();
         }, 0);
-
-
     }
 
     function startTimer() {
@@ -271,6 +271,8 @@ function home(){
 
         setCharStatus(newStatus);
         setCurrentIndex(prev => prev + 1);
+
+        inputRef.current.value = "";
     }
 
 
@@ -322,9 +324,21 @@ function home(){
             
             <p id="time" className="typeTime">{`Time: ${displayTime} `}</p>
             
+            <input
+                ref={inputRef}
+                type="text"
+                className="hiddenInput"
+                onKeyDown={handleKeyDown}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck={false}
+                inputMode="text"
+                />
+
             {isPaused && (<div className="pauseMessage"> Timer paused. Resume typing to continue.</div>)}
 
-            <div className="typeBox" onKeyDown={handleKeyDown} tabIndex={0} ref={typingRef}> 
+            <div className="typeBox"  ref={typingRef} onClick={() => inputRef.current?.focus()}> 
 
                 <div className="textWrapper" style={{
                     transform: `translateY(-${lineNumber * lineHeight}px)`}}>
