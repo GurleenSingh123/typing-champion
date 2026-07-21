@@ -464,11 +464,13 @@ function handleBackspace() {
     const value = event.target.value;
 
     if (!value) return;
-
-    const typedChar = value[value.length - 1];
-
-    processCharacter(typedChar);
-
+    
+    // If multiple characters are inserted (autocomplete/paste),
+    // process them one by one.
+    for (const char of value) {
+        processCharacter(char);
+    }
+    
     setInputValue("");
 }
 
@@ -533,6 +535,7 @@ function handleBackspace() {
                 autoCorrect="off"
                 autoCapitalize="off"
                 spellCheck={false}
+                enterKeyHint="done"
                 inputMode="text"/>
 
             {isPaused && (<div className="pauseMessage"> Timer paused. Resume typing to continue.</div>)}
