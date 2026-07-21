@@ -25,6 +25,7 @@ function home(){
     const paragraphRef = useRef(null);
     const timerRef = useRef(null);
     const inactivityRef = useRef(null);
+    const [inputValue, setInputValue] = useState("");
     
     const lineHeight = 65;
 
@@ -100,6 +101,7 @@ function home(){
 
         setCurrentIndex(0);
         setCharStatus([]);
+        setInputValue("");
     }
 
     let displayTime;
@@ -131,6 +133,7 @@ function home(){
 
         setCurrentIndex(0);
         setCharStatus([]);
+        setInputValue("");
 
         setTime(totalTime);
         setIsPaused(false);
@@ -202,92 +205,72 @@ function home(){
 
     }
 
-    function processCharacter(typedChar) {
 
-        if (!testStarted) return;
+ function processCharacter(typedChar) {
 
-        if (!isTyping) {
-            setIsTyping(true);
-        }
+    if (!testStarted) return;
 
-        if (currentIndex >= paragraph.length) {
-            return;
-        }
-
-        if (isPaused) {
-            setIsPaused(false);
-        }
-
-        startTimer();
-        resetInactivityTimer();
-
-        const expectedChar = paragraph[currentIndex];
-
-        const newStatus = [...charStatus];
-
-        if (typedChar === expectedChar) {
-            newStatus[currentIndex] = "correct";
-        } else {
-            newStatus[currentIndex] = "incorrect";
-        }
-
-        setCharStatus(newStatus);
-        setCurrentIndex(prev => prev + 1);
+    if (!isTyping) {
+        setIsTyping(true);
     }
 
-
-
-    function handleKeyDown(event) {
-
-        if (event.code === "Space") {
-            event.preventDefault();
-        }
-
-        if (
-            event.key === "Shift" ||
-            event.key === "CapsLock" ||
-            event.key === "Control" ||
-            event.key === "Alt" ||
-            event.key === "Tab"
-        ) {
-            return;
-        }
-
-        if (event.key === "Backspace") {
-
-            if (currentIndex <= 0) return;
-
-            let wordStart = currentIndex;
-
-            while (
-                wordStart > 0 &&
-                paragraph[wordStart - 1] !== " "
-            ) {
-                wordStart--;
-            }
-
-            if (currentIndex - 1 < wordStart) {
-                return;
-            }
-
-            const newStatus = [...charStatus];
-            newStatus[currentIndex - 1] = "";
-
-            setCharStatus(newStatus);
-            setCurrentIndex(prev => prev - 1);
-
-            return;
-        }
-
-        processCharacter(event.key);
+    if (isPaused) {
+        setIsPaused(false);
     }
 
+    startTimer();
+    resetInactivityTimer();
 
-    // function handleKeyDown(event) {
+    setCurrentIndex(prevIndex => {
 
-    //     if (event.code === "Space") {
-    //         event.preventDefault();
-    //     }
+        if (prevIndex >= paragraph.length) {
+            return prevIndex;
+        }
+
+        const expectedChar = paragraph[prevIndex];
+
+        setCharStatus(prevStatus => {
+
+            const newStatus = [...prevStatus];
+
+            if (typedChar === expectedChar) {
+                newStatus[prevIndex] = "correct";
+            } else {
+                newStatus[prevIndex] = "incorrect";
+            }
+
+            return newStatus;
+        });
+
+        return prevIndex + 1;
+    });
+}
+
+function handleBackspace() {
+
+    if (currentIndex <= 0) return;
+
+    let wordStart = currentIndex;
+
+    while (
+        wordStart > 0 &&
+        paragraph[wordStart - 1] !== " "
+    ) {
+        wordStart--;
+    }
+
+    if (currentIndex - 1 < wordStart) {
+        return;
+    }
+
+    const newStatus = [...charStatus];
+    newStatus[currentIndex - 1] = "";
+
+    setCharStatus(newStatus);
+    setCurrentIndex(prev => prev - 1);
+}
+
+    // function processCharacter(typedChar) {
 
     //     if (!testStarted) return;
 
@@ -297,6 +280,35 @@ function home(){
 
     //     if (currentIndex >= paragraph.length) {
     //         return;
+    //     }
+
+    //     if (isPaused) {
+    //         setIsPaused(false);
+    //     }
+
+    //     startTimer();
+    //     resetInactivityTimer();
+
+    //     const expectedChar = paragraph[currentIndex];
+
+    //     const newStatus = [...charStatus];
+
+    //     if (typedChar === expectedChar) {
+    //         newStatus[currentIndex] = "correct";
+    //     } else {
+    //         newStatus[currentIndex] = "incorrect";
+    //     }
+
+    //     setCharStatus(newStatus);
+    //     setCurrentIndex(prev => prev + 1);
+    // }
+
+
+
+    // function handleKeyDown(event) {
+
+    //     if (event.code === "Space") {
+    //         event.preventDefault();
     //     }
 
     //     if (
@@ -309,29 +321,22 @@ function home(){
     //         return;
     //     }
 
-    //     if (isPaused) {
-    //         setIsPaused(false);
-    //     }
+    //     if (event.key === "Backspace") {
 
-    //     startTimer();
-    //     resetInactivityTimer();
-
-    // if (event.key === "Backspace") {
-
-    //     if (currentIndex <= 0) return;
+    //         if (currentIndex <= 0) return;
 
     //         let wordStart = currentIndex;
 
-    //             while (
+    //         while (
     //             wordStart > 0 &&
     //             paragraph[wordStart - 1] !== " "
     //         ) {
     //             wordStart--;
-    //     }
+    //         }
 
-    //     if (currentIndex - 1 < wordStart) {
-    //         return;
-    //     }
+    //         if (currentIndex - 1 < wordStart) {
+    //             return;
+    //         }
 
     //         const newStatus = [...charStatus];
     //         newStatus[currentIndex - 1] = "";
@@ -340,49 +345,133 @@ function home(){
     //         setCurrentIndex(prev => prev - 1);
 
     //         return;
-    //     }   
+    //     }
 
     //     processCharacter(event.key);
     // }
 
+    function handleKeyDown(event) {
+
+    // Ignore desktop if the user is on a mobile device
+    if (isMobile) return;
+
+    if (
+        event.key === "Shift" ||
+        event.key === "CapsLock" ||
+        event.key === "Control" ||
+        event.key === "Alt" ||
+        event.key === "Tab"
+    ) {
+        return;
+    }
+
+    // if (event.key === "Backspace") {
+
+    //     if (currentIndex <= 0) return;
+
+    //     let wordStart = currentIndex;
+
+    //     while (
+    //         wordStart > 0 &&
+    //         paragraph[wordStart - 1] !== " "
+    //     ) {
+    //         wordStart--;
+    //     }
+
+    //     if (currentIndex - 1 < wordStart) {
+    //         return;
+    //     }
+
+    //     const newStatus = [...charStatus];
+    //     newStatus[currentIndex - 1] = "";
+
+    //     setCharStatus(newStatus);
+    //     setCurrentIndex(prev => prev - 1);
+
+    //     return;
+    // }
+
+    if (event.key === "Backspace") {
+        handleBackspace();
+        return;
+    }
+
+    processCharacter(event.key);
+}
+
+
+
     // function handleInput(event) {
 
-    //     const isTouchDevice =
-    //         "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-    //     if (!isTouchDevice) return;
+    //     // Ignore desktop keyboards (handled by onKeyDown)
+    //     if (event.nativeEvent.inputType === undefined) {
+    //         return;
+    //     }
 
     //     const value = event.target.value;
 
     //     if (!value) return;
 
-    //     processCharacter(value[value.length - 1]);
+    //     const typedChar = value[value.length - 1];
+
+    //     if (typedChar === "\n") {
+    //         event.target.value = "";
+    //         return;
+    //     }
+
+    //     processCharacter(typedChar);
 
     //     event.target.value = "";
     // }
 
     function handleInput(event) {
 
-        // Ignore desktop keyboards (handled by onKeyDown)
-        if (event.nativeEvent.inputType === undefined) {
-            return;
-        }
+    if (!isMobile) return;
 
-        const value = event.target.value;
+    const inputType = event.nativeEvent.inputType;
 
-        if (!value) return;
+    // Handle mobile backspace
+    // if (inputType === "deleteContentBackward") {
 
-        const typedChar = value[value.length - 1];
+    //     if (currentIndex <= 0) return;
 
-        if (typedChar === "\n") {
-            event.target.value = "";
-            return;
-        }
+    //     let wordStart = currentIndex;
 
-        processCharacter(typedChar);
+    //     while (
+    //         wordStart > 0 &&
+    //         paragraph[wordStart - 1] !== " "
+    //     ) {
+    //         wordStart--;
+    //     }
 
-        event.target.value = "";
-    }
+    //     if (currentIndex - 1 < wordStart) {
+    //         return;
+    //     }
+
+    //     const newStatus = [...charStatus];
+    //     newStatus[currentIndex - 1] = "";
+
+    //     setCharStatus(newStatus);
+    //     setCurrentIndex(prev => prev - 1);
+
+    //     return;
+    // }
+
+    if (inputType === "deleteContentBackward") {
+    handleBackspace();
+    return;
+}
+    const value = event.target.value;
+
+    if (!value) return;
+
+    const typedChar = value[value.length - 1];
+
+    processCharacter(typedChar);
+
+    setInputValue("");
+}
+
 
     useEffect(() => {
 
@@ -435,9 +524,11 @@ function home(){
             <input
                 ref={inputRef}
                 type="text"
+                value={inputValue}
                 className="hiddenInput"
                 onKeyDown={!isMobile ? handleKeyDown : undefined}
                 onInput={isMobile ? handleInput : undefined}
+                onChange={(e) => setInputValue(e.target.value)}
                 autoComplete="off"
                 autoCorrect="off"
                 autoCapitalize="off"
