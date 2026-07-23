@@ -109,96 +109,70 @@ html, body{
     height: 1px;
     opacity: 0;
 }
-/* 
-@media (max-width: 900px){
-    html, body{
-        background-color: black;
-        margin: 0;
-        color: white;
-        padding: 0;
-        overflow-x: hidden;
-    }
 
-    .page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
+@media(max-width: 900px){
     .typeBox{
-        width: 55%;
+        width: 65%;
         height: 350px;
-        background-color: white;
-        margin: 50px auto 50px;
-        border: none;
-        position: relative;
-        overflow: hidden;
-        outline: none;
-        border-radius: 20px;
+    }
+    
+    .typeTime{
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px){
+    .typeBox{
+        width: 70%;
+        height: 320px;
+        margin: 45px auto 45px;
     }
 
     .startBtn{
-        padding: 15px 30px;
-        border: none;
-        border-radius: 10px;
-        font-size: 20px;
-        text-align: center;
-        background-color: blue;
-        color: white;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: block;
-        margin: 0 auto 25px;
-    }
-
-    .startBtn:hover{
-        transform: translateY(-3px);
+        padding: 14px 25px;
+        font-size: 18px;
     }
 
     .typeTime{
-        font-size: 25px;
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 50px;
-    }
-
-    .typingMode{
-        cursor: none;
-        overflow: hidden;
+        margin-top: 30px;
     }
 
     .typePara{
-        color: rgba(0, 0, 0, 0.611);
-        font-size: 35px;
-        line-height: 65px;
-        font-family:Arial, Helvetica, sans-serif;
-        margin: 0;
-        padding: 12px;
-        letter-spacing: 2px;
-        overflow-y: hidden;
-        transition: transform 0.2s linear;
-    }
-
-    .correct{
-        color: rgb(0, 216, 0);
-    }
-
-    .incorrect{
-        color: red;
-    }
-
-    .active{
-        background-color: rgba(255,255,255,0.2);
-        border-left: 2px solid #00bfff;
+        font-size: 30px;
+        padding: 10px;
+        letter-spacing: 1.8px;
     }
 
     .pauseMessage{
-        color: red;
-        text-align: center;
-        font-size: 20px;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        font-weight: bold;
+        font-size: 18px;
     }
-} */
+}
+
+@media(max-width: 468px){
+    .typeBox{
+        width: 75%;
+        height: 310px;
+        margin: 30px auto 30px;
+        border-radius: 18px;
+    }
+
+    .startBtn{
+        padding: 10px 25px;
+        font-size: 18px;
+    }
+
+    .typeTime{
+        font-size: 20px;
+        margin-top: 30px;
+    }
+
+    .typePara{
+        font-size: 25px;
+        padding: 10px;
+        letter-spacing: 1.5px;
+    }
+
+    .pauseMessage{
+        font-size: 18px;
+    }
+}
